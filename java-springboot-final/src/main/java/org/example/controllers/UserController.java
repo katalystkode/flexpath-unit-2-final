@@ -18,6 +18,7 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/api/users")
 @PreAuthorize("hasAuthority('ADMIN')")
+// Did not change to isAuthenticated() so only Admins have access to secure data
 public class UserController {
     /**
      * The user data access object.
@@ -53,8 +54,8 @@ public class UserController {
      * @return The created user.
      */
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
     @PreAuthorize("permitAll()")
+    @PostMapping
     public User create(@RequestBody User user) {
         return userDao.createUser(user);
     }
